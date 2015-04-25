@@ -20,3 +20,14 @@ _cgo_export.*
 _testmain.go
 
 *.exe
+
+*.sw[op]
+/var
+/log
+/tmp
+/.idea
+*.iml
+*.log
+/ops-meta*
+/meta*
+

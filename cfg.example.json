@@ -1,0 +1,43 @@
+{
+    "debug": true,
+    "http": {
+        "enabled": true,
+        "listen": "0.0.0.0:2000"
+    },
+    "agents": [
+        {
+            "default": {
+                "name": "falcon-agent",
+                "version": "0.0.1",
+                "tarball": "http://11.11.11.11:8888/falcon",
+                "md5": "",
+                "cmd": "start"
+            },
+            "others": [
+                {
+                    "prefix": "lg-falcon",
+                    "version": "1.0.0",
+                    "tarball": "",
+                    "md5": "",
+                    "cmd": ""
+                },
+                {
+                    "prefix": "lg-dinp",
+                    "version": "1.0.1",
+                    "tarball": "",
+                    "md5": "",
+                    "cmd": ""
+                }
+            ]
+        },
+        {
+            "default": {
+                "name": "dinp-agent",
+                "version": "0.0.1",
+                "tarball": "http://11.11.11.11:8888/dinp",
+                "md5": "",
+                "cmd": "start"
+            }
+        }
+    ]
+}
