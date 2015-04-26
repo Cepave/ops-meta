@@ -14,6 +14,19 @@ func NewAgentsMap() *AgentsMap {
 	return &AgentsMap{M: make(map[string]*model.RealAgent)}
 }
 
+func (this *AgentsMap) Get(agentName string) (*model.RealAgent, bool) {
+	this.RLock()
+	defer this.RUnlock()
+	val, exists := this.M[agentName]
+	return val, exists
+}
+
+func (this *AgentsMap) Put(agentName string, realAgent *model.RealAgent) {
+	this.Lock()
+	defer this.Unlock()
+	this.M[agentName] = realAgent
+}
+
 type HostAgentsMap struct {
 	sync.RWMutex
 	M map[string]*AgentsMap
@@ -32,6 +45,23 @@ func (this *HostAgentsMap) Get(hostname string) (*AgentsMap, bool) {
 	return val, exists
 }
 
-func HandleHeartbeatRequest(req *model.HeartbeatRequest) {
+func (this *HostAgentsMap) Put(hostname string, am *AgentsMap) {
+	this.Lock()
+	defer this.Unlock()
+	this.M[hostname] = am
+}
 
+func ParseHeartbeatRequest(req *model.HeartbeatRequest) {
+	agentsMap, exists := HostAgents.Get(req.Hostname)
+	if exists {
+		for _, a := range req.RealAgents {
+			agentsMap.Put(a.Name, a)
+		}
+	} else {
+		am := NewAgentsMap()
+		for _, a := range req.RealAgents {
+			am.Put(a.Name, a)
+		}
+		HostAgents.Put(req.Hostname, am)
+	}
 }

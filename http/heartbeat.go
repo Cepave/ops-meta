@@ -3,7 +3,9 @@ package http
 import (
 	"encoding/json"
 	"gitcafe.com/ops/common/model"
+	"gitcafe.com/ops/meta/g"
 	"gitcafe.com/ops/meta/store"
+	"log"
 	"net/http"
 )
 
@@ -23,10 +25,29 @@ func configHeartbeatRoutes() {
 			return
 		}
 
-		store.HandleHeartbeatRequest(&req)
+		if req.Hostname == "" {
+			http.Error(w, "hostname is necessary", http.StatusBadRequest)
+			return
+		}
 
-		// write desired state
-		w.Write([]byte(""))
+		if g.Config().Debug {
+			log.Println("Heartbeat Request=====>>>>")
+			log.Println(req)
+		}
+
+		store.ParseHeartbeatRequest(&req)
+
+		resp := model.HeartbeatResponse{
+			ErrorMessage:  "",
+			DesiredAgents: g.DesiredAgents(req.Hostname),
+		}
+
+		if g.Config().Debug {
+			log.Println("<<<<=====Heartbeat Response")
+			log.Println(resp)
+		}
+
+		RenderJson(w, resp)
 
 	})
 
