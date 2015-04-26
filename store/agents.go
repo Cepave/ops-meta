@@ -21,6 +21,23 @@ func (this *AgentsMap) Get(agentName string) (*model.RealAgent, bool) {
 	return val, exists
 }
 
+func (this *AgentsMap) Len() int {
+	this.RLock()
+	defer this.RUnlock()
+	return len(this.M)
+}
+
+func (this *AgentsMap) IsStale(before int64) bool {
+	this.RLock()
+	defer this.RUnlock()
+	for _, ra := range this.M {
+		if ra.Timestamp > before {
+			return false
+		}
+	}
+	return true
+}
+
 func (this *AgentsMap) Put(agentName string, realAgent *model.RealAgent) {
 	this.Lock()
 	defer this.Unlock()
@@ -49,6 +66,28 @@ func (this *HostAgentsMap) Put(hostname string, am *AgentsMap) {
 	this.Lock()
 	defer this.Unlock()
 	this.M[hostname] = am
+}
+
+func (this *HostAgentsMap) Hostnames() []string {
+	this.RLock()
+	defer this.RUnlock()
+
+	count := len(this.M)
+	hostnames := make([]string, count)
+
+	i := 0
+	for hostname := range this.M {
+		hostnames[i] = hostname
+		i++
+	}
+
+	return hostnames
+}
+
+func (this *HostAgentsMap) Delete(hostname string) {
+	this.Lock()
+	defer this.Unlock()
+	delete(this.M, hostname)
 }
 
 func (this *HostAgentsMap) Status(agentName string) (ret map[string]*model.RealAgent) {

@@ -5,9 +5,8 @@ import (
 	"fmt"
 	"gitcafe.com/ops/meta/g"
 	"gitcafe.com/ops/meta/http"
+	"gitcafe.com/ops/meta/store"
 	"os"
-	"os/signal"
-	"syscall"
 )
 
 func main() {
@@ -23,14 +22,7 @@ func main() {
 	g.ParseConfig(*cfg)
 
 	go http.Start()
-
-	sigs := make(chan os.Signal, 1)
-	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
-	go func() {
-		<-sigs
-		fmt.Println()
-		os.Exit(0)
-	}()
+	go store.CleanStaleHost()
 
 	select {}
 }
