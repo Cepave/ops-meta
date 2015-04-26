@@ -17,6 +17,7 @@ func init() {
 	configCommonRoutes()
 	configProcRoutes()
 	configTarballRoutes()
+	configHeartbeatRoutes()
 }
 
 func RenderJson(w http.ResponseWriter, v interface{}) {
