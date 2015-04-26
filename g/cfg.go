@@ -34,9 +34,10 @@ type InheritConfig struct {
 }
 
 type GlobalConfig struct {
-	Debug  bool             `json:"debug"`
-	Http   *HttpConfig      `json:"http"`
-	Agents []*InheritConfig `json:"agents"`
+	Debug      bool             `json:"debug"`
+	TarballDir string           `json:"tarballDir"`
+	Http       *HttpConfig      `json:"http"`
+	Agents     []*InheritConfig `json:"agents"`
 }
 
 var (

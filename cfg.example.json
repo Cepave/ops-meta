@@ -1,5 +1,6 @@
 {
     "debug": true,
+    "tarballDir": "./tarball",
     "http": {
         "enabled": true,
         "listen": "0.0.0.0:2000"
