@@ -32,14 +32,19 @@ func configProcRoutes() {
 		arr := make([]string, len(data))
 		i := 0
 		for hostname, ra := range data {
-			arr[i] = fmt.Sprintf(
-				"%s %s %s %v %s",
-				hostname,
-				ra.Version,
-				ra.Status,
-				ra.Timestamp,
-				time.Unix(ra.Timestamp, 0).Format("2006-01-02 15:04:05"),
-			)
+			if ra != nil {
+				arr[i] = fmt.Sprintf(
+					"%s %s %s %v %s",
+					hostname,
+					ra.Version,
+					ra.Status,
+					ra.Timestamp,
+					time.Unix(ra.Timestamp, 0).Format("2006-01-02 15:04:05"),
+				)
+			} else {
+				arr[i] = "no such agent"
+			}
+
 			i++
 		}
 
