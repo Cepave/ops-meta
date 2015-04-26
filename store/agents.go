@@ -51,8 +51,28 @@ func (this *HostAgentsMap) Put(hostname string, am *AgentsMap) {
 	this.M[hostname] = am
 }
 
+func (this *HostAgentsMap) Status(agentName string) (ret map[string]*model.RealAgent) {
+	ret = make(map[string]*model.RealAgent)
+	this.RLock()
+	defer this.RUnlock()
+	for hostname, agents := range this.M {
+		ra, exists := agents.Get(agentName)
+		if !exists {
+			ret[hostname] = nil
+		} else {
+			ret[hostname] = ra
+		}
+	}
+	return
+}
+
 func ParseHeartbeatRequest(req *model.HeartbeatRequest) {
+	if req.RealAgents == nil || len(req.RealAgents) == 0 {
+		return
+	}
+
 	agentsMap, exists := HostAgents.Get(req.Hostname)
+
 	if exists {
 		for _, a := range req.RealAgents {
 			agentsMap.Put(a.Name, a)

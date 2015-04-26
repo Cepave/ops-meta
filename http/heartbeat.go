@@ -26,7 +26,7 @@ func configHeartbeatRoutes() {
 		}
 
 		if req.Hostname == "" {
-			http.Error(w, "hostname is necessary", http.StatusBadRequest)
+			http.Error(w, "hostname is blank", http.StatusBadRequest)
 			return
 		}
 
