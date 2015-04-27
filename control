@@ -84,7 +84,15 @@ function packbin() {
 }
 
 function help() {
-    echo "$0 build|pack|packbin|start|stop|restart|status|tail"
+    echo "$0 pid|reload|build|pack|packbin|start|stop|restart|status|tail"
+}
+
+function pid() {
+    cat $pidfile
+}
+
+function reload() {
+    curl -s 127.0.0.1:2000/config/reload | python -m json.tool
 }
 
 if [ "$1" == "" ]; then
@@ -105,6 +113,10 @@ elif [ "$1" == "pack" ];then
     pack
 elif [ "$1" == "packbin" ];then
     packbin
+elif [ "$1" == "pid" ];then
+    pid
+elif [ "$1" == "reload" ];then
+    reload
 else
     help
 fi
