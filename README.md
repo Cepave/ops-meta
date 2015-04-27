@@ -12,9 +12,11 @@
 ## 使用方法
 
 - 1. 把要升级的agent打好tarball，交给http server
-- 2. agent命名规范是<agent-name>-<version>.tar.gz，md5生成方式和命名：`md5sum <agent-name>-<version>.tar.gz > <agent-name>-<version>.tar.gz.md5`，agent-name中最好带上项目名称，比如：falcon-agent，全名就是：falcon-agent-1.0.0.tar.gz
+- 2. agent命名规范是`<agent-name>-<version>.tar.gz`，md5生成方式和命名：`md5sum <agent-name>-<version>.tar.gz > <agent-name>-<version>.tar.gz.md5`，agent-name中最好带上项目名称，比如：falcon-agent，全名就是：falcon-agent-1.0.0.tar.gz
 - 3. 修改ops-meta的配置文件，agent太重要了，最好有个admin专门来审核、上线
 - 4. 修改完配置之后无需重启，`curl 127.0.0.1:2000/config/reload`即可自动reload配置，如果成功，会把配置信息打印出来
+- 5. `curl 127.0.0.1:2000/status/json/falcon-agent`列出falcon-agent在各个机器上的部署情况，返回json格式
+- 6. `curl 127.0.0.1:2000/status/text/falcon-agent`列出falcon-agent在各个机器上的部署情况，返回文本格式
 
 agent tarball最终下载地址是：`{$tarball}/{$name}-{$version}.tar.gz`，为啥不在tarball这里配置成全路径呢？为了规范！就是这么横！
 
