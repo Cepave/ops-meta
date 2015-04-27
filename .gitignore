@@ -22,6 +22,7 @@ _testmain.go
 *.exe
 
 *.sw[op]
+/cfg.json
 /var
 /log
 /tmp
