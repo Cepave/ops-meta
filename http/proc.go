@@ -42,7 +42,7 @@ func configProcRoutes() {
 					time.Unix(ra.Timestamp, 0).Format("2006-01-02 15:04:05"),
 				)
 			} else {
-				arr[i] = "no such agent"
+				arr[i] = fmt.Sprintf("%s not found\n", hostname)
 			}
 
 			i++
