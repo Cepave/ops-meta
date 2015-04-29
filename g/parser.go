@@ -24,33 +24,31 @@ func DesiredAgents(hostname string) (desiredAgents []*model.DesiredAgent) {
 		}
 
 		others := inheritConfig.Others
-		if others == nil || len(others) == 0 {
-			continue
-		}
+		if others != nil && len(others) > 0 {
+			for _, otherConfig := range inheritConfig.Others {
+				if otherConfig == nil {
+					continue
+				}
 
-		for _, otherConfig := range inheritConfig.Others {
-			if otherConfig == nil {
-				continue
-			}
+				if !strings.HasPrefix(hostname, otherConfig.Prefix) {
+					continue
+				}
 
-			if !strings.HasPrefix(hostname, otherConfig.Prefix) {
-				continue
-			}
+				if otherConfig.Version != "" {
+					desiredAgent.Version = otherConfig.Version
+				}
 
-			if otherConfig.Version != "" {
-				desiredAgent.Version = otherConfig.Version
-			}
+				if otherConfig.Tarball != "" {
+					desiredAgent.Tarball = otherConfig.Tarball
+				}
 
-			if otherConfig.Tarball != "" {
-				desiredAgent.Tarball = otherConfig.Tarball
-			}
+				if otherConfig.Md5 != "" {
+					desiredAgent.Md5 = otherConfig.Md5
+				}
 
-			if otherConfig.Md5 != "" {
-				desiredAgent.Md5 = otherConfig.Md5
-			}
-
-			if otherConfig.Cmd != "" {
-				desiredAgent.Cmd = otherConfig.Cmd
+				if otherConfig.Cmd != "" {
+					desiredAgent.Cmd = otherConfig.Cmd
+				}
 			}
 		}
 
