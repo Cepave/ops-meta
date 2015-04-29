@@ -34,7 +34,7 @@ func configProcRoutes() {
 		for hostname, ra := range data {
 			if ra != nil {
 				arr[i] = fmt.Sprintf(
-					"%s %s %s %v %s",
+					"%s %s %s %v %s\n",
 					hostname,
 					ra.Version,
 					ra.Status,
@@ -48,7 +48,7 @@ func configProcRoutes() {
 			i++
 		}
 
-		w.Write([]byte(strings.Join(arr, "\n")))
+		w.Write([]byte(strings.Join(arr, "")))
 
 	})
 
