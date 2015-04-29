@@ -6,6 +6,7 @@ import (
 	"gitcafe.com/ops/meta/g"
 	"gitcafe.com/ops/meta/http"
 	"gitcafe.com/ops/meta/store"
+	"log"
 	"os"
 )
 
@@ -19,7 +20,9 @@ func main() {
 		os.Exit(0)
 	}
 
-	g.ParseConfig(*cfg)
+	if err := g.ParseConfig(*cfg); err != nil {
+		log.Fatalln(err)
+	}
 
 	go http.Start()
 	go store.CleanStaleHost()

@@ -2,6 +2,7 @@ package g
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/toolkits/file"
 	"log"
 	"sync"
@@ -52,26 +53,26 @@ func Config() *GlobalConfig {
 	return config
 }
 
-func ParseConfig(cfg string) {
+func ParseConfig(cfg string) error {
 	if cfg == "" {
-		log.Fatalln("use -c to specify configuration file")
+		return fmt.Errorf("use -c to specify configuration file")
 	}
 
 	if !file.IsExist(cfg) {
-		log.Fatalln("config file:", cfg, "is not existent")
+		return fmt.Errorf("config file %s is nonexistent", cfg)
 	}
 
 	ConfigFile = cfg
 
 	configContent, err := file.ToTrimString(cfg)
 	if err != nil {
-		log.Fatalln("read config file:", cfg, "fail:", err)
+		return fmt.Errorf("read config file %s fail %s", cfg, err)
 	}
 
 	var c GlobalConfig
 	err = json.Unmarshal([]byte(configContent), &c)
 	if err != nil {
-		log.Fatalln("parse config file:", cfg, "fail:", err)
+		return fmt.Errorf("parse config file %s fail %s", cfg, err)
 	}
 
 	configLock.Lock()
@@ -80,4 +81,5 @@ func ParseConfig(cfg string) {
 	config = &c
 
 	log.Println("read config file:", cfg, "successfully")
+	return nil
 }
