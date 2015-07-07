@@ -2,7 +2,7 @@ package http
 
 import (
 	"encoding/json"
-	"gitcafe.com/ops/meta/g"
+	"github.com/Cepave/ops-meta/g"
 	"log"
 	"net/http"
 	_ "net/http/pprof"
@@ -59,6 +59,7 @@ func Start() {
 		Addr:           addr,
 		MaxHeaderBytes: 1 << 30,
 	}
-	log.Println("http listening", addr)
-	log.Fatalln(s.ListenAndServe())
+	log.Println("https listening", addr)
+	err := http.ListenAndServeTLS(addr, "cert.pem", "key.pem", nil)
+	log.Fatalln(err)
 }

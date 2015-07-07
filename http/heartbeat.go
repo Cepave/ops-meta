@@ -2,9 +2,9 @@ package http
 
 import (
 	"encoding/json"
-	"gitcafe.com/ops/common/model"
-	"gitcafe.com/ops/meta/g"
-	"gitcafe.com/ops/meta/store"
+	"github.com/Cepave/ops-common/model"
+	"github.com/Cepave/ops-meta/g"
+	"github.com/Cepave/ops-meta/store"
 	"log"
 	"net/http"
 )

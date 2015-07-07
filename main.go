@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
-	"gitcafe.com/ops/meta/g"
-	"gitcafe.com/ops/meta/http"
-	"gitcafe.com/ops/meta/store"
+	"github.com/Cepave/ops-meta/g"
+	"github.com/Cepave/ops-meta/http"
+	"github.com/Cepave/ops-meta/store"
 	"log"
 	"os"
 )
