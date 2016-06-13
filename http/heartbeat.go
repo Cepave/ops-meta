@@ -45,7 +45,7 @@ func configHeartbeatRoutes() {
 		// TODO: This is a workaround to ensure that one updater is resposible for only one agent,
 		// so NQM agent(resp.DesiredAgents[1]) would be stopped if the request comes from owl-agent-updater.
 		if len(resp.DesiredAgents) > 1 {
-			resp.DesiredAgents[1].Cmd = "stoped"
+			resp.DesiredAgents[1].Cmd = "stop"
 		}
 
 		if g.Config().Debug {

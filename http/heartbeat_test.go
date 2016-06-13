@@ -17,14 +17,14 @@ func sendHeartbeatReq(t *testing.T) {
 	realAgent := &model.RealAgent{
 		Name:      "test",
 		Version:   "1.2.3",
-		Status:    "stoped",
+		Status:    "stop",
 		Timestamp: 123,
 	}
 	realAgents = append(realAgents, realAgent)
 	realAgent = &model.RealAgent{
 		Name:      "test2",
 		Version:   "2.2.3",
-		Status:    "stoped",
+		Status:    "stop",
 		Timestamp: 223,
 	}
 	realAgents = append(realAgents, realAgent)
