@@ -15,17 +15,17 @@ func sendHeartbeatReq(t *testing.T) {
 	req := model.HeartbeatRequest{Hostname: "cnc-bj-123-123-123-123"}
 	realAgents := []*model.RealAgent{}
 	realAgent := &model.RealAgent{
-		Name:      "test",
-		Version:   "1.2.3",
-		Status:    "stop",
-		Timestamp: 123,
+		Name:      "installed-agent1",
+		Version:   "5.1.4",
+		Status:    "started",
+		Timestamp: 1465874871,
 	}
 	realAgents = append(realAgents, realAgent)
 	realAgent = &model.RealAgent{
-		Name:      "test2",
-		Version:   "2.2.3",
-		Status:    "stop",
-		Timestamp: 223,
+		Name:      "installed-agent2",
+		Version:   "0.9.1",
+		Status:    "stoped",
+		Timestamp: 1465874871,
 	}
 	realAgents = append(realAgents, realAgent)
 	req.RealAgents = realAgents
