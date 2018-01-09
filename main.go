@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/Cepave/ops-meta/g"
-	"github.com/Cepave/ops-meta/http"
-	"github.com/Cepave/ops-meta/store"
+	"github.com/longfengfirst/ops-meta/g"
+	"github.com/longfengfirst/ops-meta/http"
+	"github.com/longfengfirst/ops-meta/store"
 	"log"
 	"os"
 )

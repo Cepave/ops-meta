@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Cepave/ops-common/model"
-	"github.com/Cepave/ops-meta/g"
+	"github.com/longfengfirst/ops-meta/g"
 	"github.com/toolkits/net/httplib"
 	"net/http"
 	"testing"
