@@ -3,8 +3,8 @@ package http
 import (
 	"encoding/json"
 	"github.com/Cepave/ops-common/model"
-	"github.com/Cepave/ops-meta/g"
-	"github.com/Cepave/ops-meta/store"
+	"github.com/longfengfirst/ops-meta/g"
+	"github.com/longfengfirst/ops-meta/store"
 	"log"
 	"net/http"
 )
